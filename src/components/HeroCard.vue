@@ -47,12 +47,16 @@ export default {
   justify-content: flex-start;
   margin: 5px;
   width: 200px;
+  height: 100%;
   cursor: pointer;
   transform-style: preserve-3d;
+  box-shadow: 0px 0px 0px 1px rgba(0,0,0,1);
+  border-radius: 5px;
 
   &__info {
-    transition: transform 2s;
+    transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     backface-visibility: hidden;
+    border-radius: 5px;
   }
 
   &__avatar {
@@ -65,6 +69,7 @@ export default {
     height: 100%;
     width: 100%;
     object-fit: cover;
+    border-radius: 5px 5px 0 0;
   }
 
   &__nickname-container {
@@ -76,6 +81,7 @@ export default {
     background: black;
     width: 100%;
     text-align: center;
+    border-radius: 0 0 5px 5px;
   }
 
   &__nickname {
@@ -93,6 +99,7 @@ export default {
     left: 0;
     transition: transform 0.3s;
     width: 100%;
+    border-radius: 0 0 5px 5px;
   }
 
   &:hover &__nickname-container::before {
@@ -108,9 +115,11 @@ export default {
     font-size: 14px;
     background: black;
     text-align: center;
-    transition: transform 2s;
+    transition: transform 1s;
     backface-visibility: hidden;
     transform: rotateY(180deg);
+    transition-timing-function : cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-radius: 5px;
   }
 
   &--show-description &__info {

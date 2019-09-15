@@ -1,7 +1,7 @@
 <template>
-  <div class="heros-list">
+  <div class="heroes-list">
     <hero-card
-      v-for="hero in heros"
+      v-for="hero in heroes"
       :key="hero.id"
       :name="hero.name"
       :description="hero.description"
@@ -13,8 +13,8 @@
 <script>
 import axios from "axios";
 import HeroCard from "@/components/HeroCard.vue";
-import credentials from "@/credentials.js";
-import md5 from "js-md5";
+import { urlAPI } from "@/credentials.js";
+import getAuth from "@/utils/utils.js";
 
 export default {
   components: {
@@ -22,36 +22,29 @@ export default {
   },
   data() {
     return {
-      heros: []
+      heroes: []
     };
   },
   methods: {
-    getAuth() {
-      const ts = Date.now();
-      const hash = md5(
-        ts + credentials.MARVEL_KEY_PRIVATE + credentials.MARVEL_KEY_PUBLIC
-      );
-      return { ts, hash };
-    },
-    getHeros() {
-      const { ts, hash } = this.getAuth();
+    getheroes() {
+      const { ts, hash, publicKey } = getAuth();
       axios
         .get(
-          `${credentials.urlAPI}characters?limit=30&ts=${ts}&apikey=${credentials.MARVEL_KEY_PUBLIC}&hash=${hash}`
+          `${urlAPI}characters?limit=30&ts=${ts}&apikey=${publicKey}&hash=${hash}`
         )
         .then(response => {
-          this.heros = response.data.data.results;
+          this.heroes = response.data.data.results;
         });
     },
   },
   mounted() {
-    this.getHeros();
+    this.getheroes();
   }
 };
 </script>
 
 <style scoped lang="scss">
-.heros-list {
+.heroes-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;

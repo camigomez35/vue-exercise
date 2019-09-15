@@ -2,7 +2,7 @@
   <div id="app">
     <navbar></navbar>
     <div class="container">
-      <keep-alive include="home">
+      <keep-alive>
         <router-view/>
       </keep-alive>
     </div>
@@ -24,13 +24,16 @@ export default {
   margin: 0;
 }
 
+body {
+  background: #2c3e50;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   color: white;
 }
 
 .container {
-  background: #2c3e50;
   padding: 10px 50px;
 }
 </style>
